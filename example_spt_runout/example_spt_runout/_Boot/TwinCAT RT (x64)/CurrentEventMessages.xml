@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<TcEventSources Version="2">
+	<Source>
+		<GUID>{D91DF1E2-6954-4D5F-898A-588BCEA83D28}</GUID>
+		<Name LcId="1033">PackML Base Alarms</Name>
+		<Event>
+			<Id>1</Id>
+			<Message LcId="1033">Reference Event that should be the first in all event classes</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">Reference Event that should be the first in all event classes</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>2</Id>
+			<Message LcId="1033">{0} - SubModule Error</Message>
+		</Event>
+		<Event>
+			<Id>3</Id>
+			<Message LcId="1033">{0} - Component Error</Message>
+		</Event>
+		<Event>
+			<Id>4</Id>
+			<Message LcId="1033">{0} - Invalid Interface</Message>
+		</Event>
+	</Source>
+	<Source>
+		<GUID>{4C6A18FF-90F9-473D-BF33-8C850284069D}</GUID>
+		<Name LcId="1033">PackML</Name>
+		<Name LcId="1034">PackML</Name>
+		<Event>
+			<Id>1</Id>
+			<Message LcId="1033">Reference Event that should be the first in all event classes</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">Reference Event that should be the first in all event classes</Text>
+			</Detail>
+		</Event>
+		<Event>
+			<Id>2</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Starting" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Starting" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>3</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Execute" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Execute" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>4</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Completing" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Completing" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>5</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Complete" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Complete" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>6</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Resetting" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Resetting" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>7</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Idle" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Idle" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>8</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Holding" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Holding" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>9</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Held" PackML State - Manual intervention required for recovery]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Held" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>10</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Unholding" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Unholding" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>11</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Suspending" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Suspending" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>12</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Suspended" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Suspended" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>13</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Unsuspending" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Unsuspending" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>14</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Stopping" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Stopping" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>15</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Stopped" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Stopped" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>16</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Aborting" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Aborting" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>17</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Aborted" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Aborted" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>18</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Clearing" PackML State]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en el estado "Clearing" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>19</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Production" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "Clearing" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>20</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Maintenance" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "Maintenance" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>21</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "Manual" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "Manual" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>22</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>23</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>24</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>25</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>26</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>27</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>28</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>29</Id>
+			<Message LcId="1033"><![CDATA[{0} - Entered "{1}" PackML Mode]]></Message>
+			<Message LcId="1034"><![CDATA[{0} - Entró en la moda "{1}" de PackML]]></Message>
+		</Event>
+		<Event>
+			<Id>30</Id>
+			<Message LcId="1033">{0} - Entered Undefined PackML State</Message>
+			<Message LcId="1034">{0} - Entró en un estado indefinido de PackML</Message>
+		</Event>
+		<Event>
+			<Id>31</Id>
+			<Message LcId="1033">{0} - Received Invalid PackML State Command</Message>
+			<Message LcId="1034">{0} - Comando de estado de PackML no válido recibido</Message>
+		</Event>
+		<Event>
+			<Id>32</Id>
+			<Message LcId="1033">{0} - Entered Invalid PackML Mode</Message>
+			<Message LcId="1034">{0} - Entró en una moda indefinida de PackML</Message>
+		</Event>
+		<Event>
+			<Id>33</Id>
+			<Message LcId="1033">{0} - Received Invalid PackML Mode Command</Message>
+			<Message LcId="1034">{0} - Comando de moda de PackML no válido recibido</Message>
+		</Event>
+	</Source>
+	<Source>
+		<GUID>{53984316-BF60-4C28-8DED-3ECE762FB218}</GUID>
+		<Name LcId="1033">Trace Log</Name>
+		<Event>
+			<Id>1</Id>
+			<Message LcId="1033">{0}|{1}|{2}|{3}|{4}|{5}</Message>
+			<Detail>
+				<Name>Comment</Name>
+				<Text LcId="1033">Arguments:
+0 - Textual message
+1 - DC Timestamp
+2 - Instance (FB name)
+3 - Context (Calling task)
+4 - ScanCount
+5 - Flags</Text>
+			</Detail>
+		</Event>
+	</Source>
+</TcEventSources>

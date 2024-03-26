@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_EM_Work" Id="{2ee5a866-b8eb-4e03-bc9e-c8be5ccee6d1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_EM_Work EXTENDS FB_PackML_BaseModule
+VAR
+	// Submodules
+	
+	// Components
+	
+	// Module Data
+	// --Param
+	// --Recipe
+	// --HMI
+	
+	// Alarms
+	
+	// Other I/O
+	
+	// Miscellaneous
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="PackML" Id="{6860c64a-d420-4a60-ac99-994d50770e67}">
+      <Folder Name="Acting States" Id="{6e9e71cc-2e2a-404f-b2c8-48ff6cd0d1ed}" />
+      <Folder Name="Waiting States" Id="{cea085db-4679-4437-ad86-983701ec994d}" />
+    </Folder>
+    <Folder Name="REFs" Id="{8c42d4bf-fe40-4477-bde9-91826866164c}" />
+    <Method Name="Aborted" Id="{e8c3e360-0369-4864-9e80-993078c4e2cd}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Aborted
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Aborting" Id="{67160e95-7f39-46a7-9f91-3c5e2867d3df}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Aborting
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Aborting();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clearing" Id="{604446e8-e37a-4e0e-a514-588a019bc1f2}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Clearing
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Clearing();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Complete" Id="{817ea939-88f0-41b4-a596-2b3f0d54f2e2}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Complete
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CreateEvents" Id="{2ed811a8-478d-40b7-bf50-1f2a8f9af363}">
+      <Declaration><![CDATA[//! @summary Initializes event function blocks using this module's name
+METHOD PROTECTED CreateEvents
+
+//! @description This method is called by <c>Initialize()</c> as required]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Add your event creation here
+
+// Super call to base
+SUPER^.CreateEvents();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CyclicLogic" Id="{a51d14b1-6c76-4901-92ca-9c7862e36047}">
+      <Declaration><![CDATA[METHOD CyclicLogic
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT _InitComplete THEN
+    _InitComplete := Initialize();
+    RETURN;
+END_IF
+
+SUPER^.CyclicLogic();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{7a75d2a7-3bb4-4632-993d-33175f999cfd}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Execute
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Held" Id="{43f5cec9-043a-41c4-b2d5-15a9fbc0ce34}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Held
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Holding" Id="{53d3b2ae-b1fa-45cf-a857-91c07cabfe94}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Holding
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Holding();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Idle" Id="{372ab538-a41a-45c9-8379-1cf30e5a4791}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Idle
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Initialize" Id="{52ebd532-0cc8-49f4-bfb7-40197ee9bd5c}">
+      <Declaration><![CDATA[//! @summary Basic module initialization logic
+METHOD PROTECTED Initialize : BOOL;
+VAR
+	i						 : UDINT;
+	varInfo					 : __SYSTEM.VAR_INFO;
+	AllSubUnitsInitialized	 : BOOL := TRUE;
+	AllComponentsInitialized : BOOL := TRUE;
+END_VAR
+
+//! @description This method is called by <c>CyclicLogic()</c> as required]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Initialize := FALSE;
+CASE DescendantSequenceState OF
+    0: // Initialize
+        _LogModeChanges         := FALSE;
+        _LogStateChanges        := FALSE;
+        DescendantSequenceState := DescendantSequenceState + 10;
+	
+	10: // Register Submodules
+		//RegisterSubmodule(submodule);
+		DescendantSequenceState := DescendantSequenceState + 10;
+    20: // Register Components
+		//RegisterComponent(component);
+        DescendantSequenceState := DescendantSequenceState + 10;
+    30: // Call the Super
+        IF SUPER^.Initialize() THEN
+            DescendantSequenceState := DescendantSequenceState + 10;
+        END_IF
+    40:
+        Initialize := TRUE;
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Resetting" Id="{ae1b2d3a-b695-4006-9bc3-a8df4f28f741}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Resetting
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Resetting();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Starting" Id="{073393b8-c029-4c92-b746-59982aae1455}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Starting
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Starting();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stopped" Id="{a7e85a21-d654-430d-87d0-b19f5e51c29e}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Stopped
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Stopping" Id="{1acaf942-5877-4658-a286-036e1477e9e5}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Stopping
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Stopping();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Suspended" Id="{0ebfafe7-4c6c-4e00-bb66-c2f0bfba56e5}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Suspended
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Suspending" Id="{ba71f435-1bd1-46cf-a491-40b61212bfc7}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Suspending
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Suspending();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Undefined" Id="{ce65f851-922e-4983-9161-a774acef8f1a}" FolderPath="PackML\Waiting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Undefined
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Unholding" Id="{bb260919-c599-4e40-988f-9049b175db6f}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Unholding
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Unholding();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Unsuspending" Id="{716c933f-3905-498b-bed4-057b361cdd71}" FolderPath="PackML\Acting States\">
+      <Declaration><![CDATA[METHOD PROTECTED Unsuspending
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _CurrentMode OF
+	E_PMLUnitMode.ePMLUnitMode_Production:
+        CASE DescendantSequenceState OF
+			0:
+				NoStateTasksToComplete := FALSE;
+				DescendantSequenceState := DescendantSequenceState + 10;
+			10:
+				StateTasksComplete := TRUE;
+		END_CASE
+		
+	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
+        ;	
+END_CASE
+
+// Call Super
+SUPER^.Unsuspending();]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_EM_Work">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Aborted">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Aborting">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Clearing">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Complete">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.CreateEvents">
+      <LineId Id="6" Count="2" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.CyclicLogic">
+      <LineId Id="70" Count="4" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="77" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Execute">
+      <LineId Id="6" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Held">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Holding">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Idle">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Initialize">
+      <LineId Id="12" Count="5" />
+      <LineId Id="27" Count="3" />
+      <LineId Id="18" Count="8" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Resetting">
+      <LineId Id="6" Count="3" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="10" Count="6" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Starting">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Stopped">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Stopping">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Suspended">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Suspending">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Undefined">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Unholding">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_EM_Work.Unsuspending">
+      <LineId Id="6" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
