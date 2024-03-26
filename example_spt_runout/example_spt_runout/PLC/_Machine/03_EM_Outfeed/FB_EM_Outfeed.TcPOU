@@ -17,7 +17,10 @@ VAR
 	// Other I/O
 	
 	// Miscellaneous
-	
+	ExecuteState: UDINT;
+	Runout: BOOL;
+	RunoutComplete: BOOL;
+	tonRunout: TON;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -128,16 +131,32 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE _CurrentMode OF
 	E_PMLUnitMode.ePMLUnitMode_Production:
-        CASE DescendantSequenceState OF
+        CASE ExecuteState OF
 			0:
-				DescendantSequenceState := DescendantSequenceState + 10;
-			10:
-				;
+				RunOut := FALSE;
+				RunOutComplete := FALSE;
+				tonRunOut.IN := FALSE;
+				ExecuteState := ExecuteState + 10;
+			10: // Production with Stopping Runout
+				IF RunOut THEN
+					tonRunOut.PT := T#10S;
+					tonRunOut.IN := TRUE;
+					IF tonRunOut.Q THEN
+						RunOutComplete := TRUE;
+					END_IF
+				ELSE
+					tonRunOut.IN := FALSE;
+				END_IF
+
+				
 		END_CASE
 		
 	E_PMLUnitMode.ePMLUnitMode_Manual, E_PMLUnitMode.ePMLUnitMode_Maintenance:
         ;	
-END_CASE]]></ST>
+END_CASE
+
+// Delay Runout
+tonRunout();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Held" Id="{4de9c0b7-9e12-4a94-8628-52c14cdecf9d}" FolderPath="PackML\Waiting States\">
@@ -251,6 +270,7 @@ END_VAR
         CASE DescendantSequenceState OF
 			0:
 				NoStateTasksToComplete := FALSE;
+				ExecuteState := 0;
 				DescendantSequenceState := DescendantSequenceState + 10;
 			10:
 				StateTasksComplete := TRUE;
@@ -285,7 +305,17 @@ END_VAR
 			0:
 				NoStateTasksToComplete := FALSE;
 				DescendantSequenceState := DescendantSequenceState + 10;
-			10:
+			
+			10: // Wait for Runout to complete
+				RunOut := TRUE;
+				IF NOT RunOutComplete THEN
+					THIS^.Execute();
+				ELSE
+					RunOutComplete := FALSE;
+					DescendantSequenceState := DescendantSequenceState + 10;
+				END_IF
+				
+			20:
 				StateTasksComplete := TRUE;
 		END_CASE
 		
@@ -414,14 +444,7 @@ SUPER^.Unsuspending();]]></ST>
       <LineId Id="77" Count="0" />
     </LineIds>
     <LineIds Name="FB_EM_Outfeed.Execute">
-      <LineId Id="6" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="10" Count="2" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="9" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="16" Count="0" />
+      <LineId Id="22" Count="26" />
       <LineId Id="13" Count="0" />
     </LineIds>
     <LineIds Name="FB_EM_Outfeed.Held">
@@ -450,14 +473,14 @@ SUPER^.Unsuspending();]]></ST>
       <LineId Id="18" Count="0" />
     </LineIds>
     <LineIds Name="FB_EM_Outfeed.Starting">
-      <LineId Id="6" Count="14" />
+      <LineId Id="24" Count="15" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_EM_Outfeed.Stopped">
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_EM_Outfeed.Stopping">
-      <LineId Id="6" Count="14" />
+      <LineId Id="24" Count="24" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_EM_Outfeed.Suspended">
